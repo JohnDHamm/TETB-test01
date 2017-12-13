@@ -1,0 +1,34 @@
+.container {
+	margin: auto;
+	width: 40%;
+}
+
+.pageTitle {
+	text-align: center;
+}
+
+.sectionTitle {
+	color: #2a6ece;
+	border-bottom: 1px solid #2a6ece;
+}
+
+.slider {
+	margin: 20px auto;
+}
+
+.profitBlock {
+	margin: 20px auto;
+}
+
+.profitLine {
+	font-style: italic;
+	font-size: 20px;
+	color: #555;
+}
+
+.profitAmount {
+	font-style: italic;
+	color: #7ace2b;
+	font-size: 30px;
+	padding-left: 20px;
+}
