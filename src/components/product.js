@@ -134,7 +134,7 @@ export default class Product extends React.Component {
 						/>
 				</div>
 				<div className="slider">
-					<p>Hours to make 1 unit: {this.state.hoursPerUnit}</p>
+					<p>Hours to make one unit: {this.state.hoursPerUnit}</p>
 					<Slider
 						value={this.state.hoursPerUnit}
 						defaultValue={this.state.hoursPerUnit}
@@ -170,11 +170,16 @@ export default class Product extends React.Component {
 						/>
 				</div>
 				<div className="profitBlock">
-					<span className="profitLine">Weekly profit:</span><span className="profitAmount">${weeklyProfit}</span>
-					<span className="profitLine">Hourly pay:</span><span className="profitAmount">${hourlyRate}</span>
+					<div>
+						<span className="profitLine">Weekly profit:</span><span className="profitAmount">${weeklyProfit}</span>
+					</div>
+					<div>
+						<span className="profitLine">Hourly pay:</span><span className="profitAmount">${hourlyRate}</span>
+					</div>
 				</div>
 				<RevenuePieChart
 					data={productChartData}
+					weeklyRevenue={weeklyRevenue}
 				/>
 			</div>
 		)

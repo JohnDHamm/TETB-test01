@@ -6,12 +6,17 @@ export default class RevenuePieChart extends React.Component {
 
 
 	render() {
-		const { data } = this.props;
+		const { data, weeklyRevenue } = this.props;
 		const colors = [ Values.profitColor, Values.operColor, Values.cogColor ];
+
+		// const renderCustomLabel = () => {
+		// 	return ()
+		// }
+
 
 		return (
 			<div>
-				<PieChart width={400} height={300}>
+				<PieChart width={350} height={250}>
 					<Pie
 						dataKey="value"
 						data={data}
@@ -27,8 +32,11 @@ export default class RevenuePieChart extends React.Component {
 					>
 						{ data.map((entry, index) => <Cell key={entry.name} fill={colors[index]} /> )}
 					</Pie>
+					<Legend verticalAlign="bottom" />
 				</PieChart>
-
+				<div>
+					<p>Total weekly revenue: ${weeklyRevenue}</p>
+				</div>
 			</div>
 
 
