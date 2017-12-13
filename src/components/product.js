@@ -61,24 +61,17 @@ export default class Product extends React.Component {
 		const weeklyOperCosts = this.calcWeeklyOperCosts();
 		const weeklyProfit = grossProfit - weeklyOperCosts;
 		const hourlyRate = this.calcHourlyRate(weeklyProfit);
-		// const taxes = Math.round(weeklyRevenue * Values.taxRate);
-		// const income = netProfit - taxes;
-		// const monthlyProfit = Math.round(income * Values.weeksPerMonth);
-		// const yearlyProfit = Math.round(monthlyProfit * 12);
-		// const productData = [
-		// 	{ name: 'profit',
-		// 		value: monthlyProfit
-		// 	},
-		// 	{ name: 'taxes',
-		// 		value: taxes
-		// 	},
-		// 	{ name: 'operations costs',
-		// 		value: weeklyOperCosts
-		// 	},
-		// 	{ name: 'cost of goods',
-		// 		value: costOfGoods
-		// 	}
-		// ]
+		const productChartData = [
+			{ name: 'profit',
+				value: weeklyProfit
+			},
+			{ name: 'operations costs',
+				value: weeklyOperCosts
+			},
+			{ name: 'cost of goods',
+				value: costOfGoods
+			}
+		]
 
 		return (
 			<div>
@@ -180,12 +173,8 @@ export default class Product extends React.Component {
 					<span className="profitLine">Weekly profit:</span><span className="profitAmount">${weeklyProfit}</span>
 					<span className="profitLine">Hourly pay:</span><span className="profitAmount">${hourlyRate}</span>
 				</div>
-				<WeeklyBreakdown
-					weeklyRevenue={weeklyRevenue}
-					costOfGoods={costOfGoods}
-					grossProfit={grossProfit}
-					weeklyOperCosts={weeklyOperCosts}
-					weeklyProfit={weeklyProfit}
+				<RevenuePieChart
+					data={productChartData}
 				/>
 			</div>
 		)
