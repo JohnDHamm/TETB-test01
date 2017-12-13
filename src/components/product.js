@@ -12,7 +12,8 @@ export default class Product extends React.Component {
 			unitPrice: 10,
 			unitsSoldPerWeek: 20,
 			unitCost: 5,
-			otherCosts: 400
+			hoursPerUnit: 1,
+			otherCosts: 100
 		}
 	}
 
@@ -26,6 +27,10 @@ export default class Product extends React.Component {
 
 	handleUnitCostSlider(value) {
 		this.setState({ unitCost: value });
+	}
+
+	handleHoursPerUnitSlider(value) {
+		this.setState({ hoursPerUnit: value });
 	}
 
 	handleOtherCostsSlider(value) {
@@ -44,31 +49,36 @@ export default class Product extends React.Component {
 		return Math.round( this.state.otherCosts / Values.weeksPerMonth );
 	}
 
+	calcHourlyRate(weeklyProfit) {
+		return ( weeklyProfit / ( this.state.hoursPerUnit * this.state.unitsSoldPerWeek )).toFixed(2);
+	}
+
 
 	render() {
 		const weeklyRevenue = this.calcWeeklyRevenue();
 		const costOfGoods = this.calcCostOfGoods();
 		const grossProfit = weeklyRevenue - costOfGoods;
 		const weeklyOperCosts = this.calcWeeklyOperCosts();
-		const netProfit = grossProfit - weeklyOperCosts;
-		const taxes = Math.round(weeklyRevenue * Values.taxRate);
-		const income = netProfit - taxes;
-		const monthlyProfit = Math.round(income * Values.weeksPerMonth);
-		const yearlyProfit = Math.round(monthlyProfit * 12);
-		const productData = [
-			{ name: 'profit',
-				value: monthlyProfit
-			},
-			{ name: 'taxes',
-				value: taxes
-			},
-			{ name: 'operations costs',
-				value: weeklyOperCosts
-			},
-			{ name: 'cost of goods',
-				value: costOfGoods
-			}
-		]
+		const weeklyProfit = grossProfit - weeklyOperCosts;
+		const hourlyRate = this.calcHourlyRate(weeklyProfit);
+		// const taxes = Math.round(weeklyRevenue * Values.taxRate);
+		// const income = netProfit - taxes;
+		// const monthlyProfit = Math.round(income * Values.weeksPerMonth);
+		// const yearlyProfit = Math.round(monthlyProfit * 12);
+		// const productData = [
+		// 	{ name: 'profit',
+		// 		value: monthlyProfit
+		// 	},
+		// 	{ name: 'taxes',
+		// 		value: taxes
+		// 	},
+		// 	{ name: 'operations costs',
+		// 		value: weeklyOperCosts
+		// 	},
+		// 	{ name: 'cost of goods',
+		// 		value: costOfGoods
+		// 	}
+		// ]
 
 		return (
 			<div>
@@ -131,12 +141,30 @@ export default class Product extends React.Component {
 						/>
 				</div>
 				<div className="slider">
+					<p>Hours to make 1 unit: {this.state.hoursPerUnit}</p>
+					<Slider
+						value={this.state.hoursPerUnit}
+						defaultValue={this.state.hoursPerUnit}
+						min={1}
+						max={10}
+						step={1}
+						onChange={this.handleHoursPerUnitSlider.bind(this)}
+						trackStyle={{ backgroundColor: Values.costs}}
+						handleStyle={{
+							borderColor: '#555',
+							width: 20,
+							height: 20,
+							marginLeft: -10,
+							marginTop: -8 }}
+						/>
+				</div>
+				<div className="slider">
 					<p>Other monthly costs: ${this.state.otherCosts}</p>
 					<Slider
 						value={this.state.otherCosts}
 						defaultValue={this.state.otherCosts}
 						min={0}
-						max={2000}
+						max={1000}
 						step={1}
 						onChange={this.handleOtherCostsSlider.bind(this)}
 						trackStyle={{ backgroundColor: Values.costs}}
@@ -149,16 +177,15 @@ export default class Product extends React.Component {
 						/>
 				</div>
 				<div className="profitBlock">
-					<span className="profitLine">Potential monthly profit:</span><span className="profitAmount">${monthlyProfit}</span>
+					<span className="profitLine">Weekly profit:</span><span className="profitAmount">${weeklyProfit}</span>
+					<span className="profitLine">Hourly pay:</span><span className="profitAmount">${hourlyRate}</span>
 				</div>
 				<WeeklyBreakdown
 					weeklyRevenue={weeklyRevenue}
 					costOfGoods={costOfGoods}
 					grossProfit={grossProfit}
 					weeklyOperCosts={weeklyOperCosts}
-					netProfit={netProfit}
-					taxes={taxes}
-					income={income}
+					weeklyProfit={weeklyProfit}
 				/>
 			</div>
 		)

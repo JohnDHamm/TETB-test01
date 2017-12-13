@@ -12,9 +12,7 @@ export default class WeeklyBreakdown extends React.Component {
 					<p>- Cost of Goods: ${this.props.costOfGoods}</p>
 					<p>= Gross Profit: ${this.props.grossProfit}</p>
 					<p>- Operational Costs: ${this.props.weeklyOperCosts}</p>
-					<p>= Net Profit: ${this.props.netProfit}</p>
-					<p>- Taxes: ${this.props.taxes}</p>
-					<p>= Income: ${this.props.income}</p>
+					<p>= Weekly Profit: ${this.props.weeklyProfit}</p>
 				</div>
 
 			</div>
