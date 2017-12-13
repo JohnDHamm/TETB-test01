@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import Values from '../styles/values';
 
 export default class Service extends React.Component {
 		constructor(props) {
@@ -46,7 +47,7 @@ export default class Service extends React.Component {
 						max={100}
 						step={1}
 						onChange={this.handleHourlyRateSlider.bind(this)}
-						trackStyle={{ backgroundColor: '#555'}}
+						trackStyle={{ backgroundColor: Values.revenue}}
 						handleStyle={{
 							borderColor: '#555',
 							width: 20,
@@ -64,7 +65,7 @@ export default class Service extends React.Component {
 						max={40}
 						step={1}
 						onChange={this.handleHoursPerWeekSlider.bind(this)}
-						trackStyle={{ backgroundColor: '#555'}}
+						trackStyle={{ backgroundColor: Values.revenue}}
 						handleStyle={{
 							borderColor: '#555',
 							width: 20,
@@ -82,7 +83,7 @@ export default class Service extends React.Component {
 						max={2000}
 						step={1}
 						onChange={this.handleCostsPerMonthSlider.bind(this)}
-						trackStyle={{ backgroundColor: '#555'}}
+						trackStyle={{ backgroundColor: Values.costs}}
 						handleStyle={{
 							borderColor: '#555',
 							width: 20,

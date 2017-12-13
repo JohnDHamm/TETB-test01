@@ -2,15 +2,16 @@ import React from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Values from '../styles/values';
+import WeeklyBreakdown from './weeklyBreakdown';
 
 export default class Product extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			unitPrice: 1,
-			unitsSoldPerWeek: 1,
-			unitCost: 0,
-			otherCosts: 0
+			unitPrice: 10,
+			unitsSoldPerWeek: 20,
+			unitCost: 5,
+			otherCosts: 400
 		}
 	}
 
@@ -31,16 +32,34 @@ export default class Product extends React.Component {
 	}
 
 	calcWeeklyRevenue() {
-		return ( this.state.unitPrice - this.state.unitCost ) * this.state.unitsSoldPerWeek;
+		return this.state.unitPrice * this.state.unitsSoldPerWeek;
 	}
 
-	calcProductProfit() {
-		return (( this.state.unitPrice - this.state.unitCost ) * ( this.state.unitsSoldPerWeek * 4 )) - this.state.otherCosts;
+	calcCostOfGoods() {
+		return ( this.state.unitCost * this.state.unitsSoldPerWeek );
+	}
+
+	calcGrossProfit() {
+		return ( this.calcWeeklyRevenue() - this.calcCostOfGoods() )
+	}
+
+	calcWeeklyOperCosts() {
+		return Math.round( this.state.otherCosts / Values.weeksPerMonth );
+	}
+
+	calcProductMonthlyProfit() {
+		return (( this.state.unitPrice - this.state.unitCost ) * ( this.state.unitsSoldPerWeek * Values.weeksPerMonth )) - this.state.otherCosts;
 	}
 
 
 	render() {
-		const monthlyProductRevenue = this.calcProductProfit();
+		const weeklyRevenue = this.calcWeeklyRevenue();
+		const costOfGoods = this.calcCostOfGoods();
+		const grossProfit = weeklyRevenue - costOfGoods;
+		const weeklyOperCosts = this.calcWeeklyOperCosts();
+		const netProfit = grossProfit - weeklyOperCosts;
+		const taxes = weeklyRevenue * Values.taxRate;
+		const income = netProfit - taxes;
 
 		return (
 			<div>
@@ -120,8 +139,17 @@ export default class Product extends React.Component {
 						/>
 				</div>
 				<div className="profitBlock">
-					<span className="profitLine">Potential monthly profit:</span><span className="profitAmount">${monthlyProductRevenue}</span>
+					<span className="profitLine">Potential monthly profit:</span><span className="profitAmount">${Math.round(this.calcProductMonthlyProfit())}</span>
 				</div>
+				<WeeklyBreakdown
+					weeklyRevenue={weeklyRevenue}
+					costOfGoods={costOfGoods}
+					grossProfit={grossProfit}
+					weeklyOperCosts={weeklyOperCosts}
+					netProfit={netProfit}
+					taxes={taxes}
+					income={income}
+					/>
 			</div>
 		)
 	}
