@@ -3,6 +3,7 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Values from '../styles/values';
 import WeeklyBreakdown from './weeklyBreakdown';
+import RevenuePieChart from './revenuePieChart';
 
 export default class Product extends React.Component {
 	constructor(props) {
@@ -54,6 +55,20 @@ export default class Product extends React.Component {
 		const income = netProfit - taxes;
 		const monthlyProfit = Math.round(income * Values.weeksPerMonth);
 		const yearlyProfit = Math.round(monthlyProfit * 12);
+		const productData = [
+			{ name: 'profit',
+				value: monthlyProfit
+			},
+			{ name: 'taxes',
+				value: taxes
+			},
+			{ name: 'operations costs',
+				value: weeklyOperCosts
+			},
+			{ name: 'cost of goods',
+				value: costOfGoods
+			}
+		]
 
 		return (
 			<div>
@@ -77,6 +92,7 @@ export default class Product extends React.Component {
 							marginLeft: -10,
 							marginTop: -8 }}
 						/>
+
 				</div>
 				<div className="slider">
 					<p>Units sold per week: {this.state.unitsSoldPerWeek}</p>
@@ -134,7 +150,6 @@ export default class Product extends React.Component {
 				</div>
 				<div className="profitBlock">
 					<span className="profitLine">Potential monthly profit:</span><span className="profitAmount">${monthlyProfit}</span>
-					<p>That's ${yearlyProfit} per year after taxes.</p>
 				</div>
 				<WeeklyBreakdown
 					weeklyRevenue={weeklyRevenue}
