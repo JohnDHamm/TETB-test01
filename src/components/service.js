@@ -2,14 +2,16 @@ import React from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Values from '../styles/values';
+import WeeklyBreakdown from './weeklyBreakdown';
+
 
 export default class Service extends React.Component {
 		constructor(props) {
 		super(props);
 		this.state = {
-			hoursPerWeek: 1,
-			hourlyRate: 1,
-			costsPerMonth: 0
+			hoursPerWeek: 20,
+			hourlyRate: 25,
+			costsPerMonth: 400
 		}
 	}
 
@@ -25,13 +27,25 @@ export default class Service extends React.Component {
 		this.setState({ costsPerMonth: value });
 	}
 
-	calcServiceProfit() {
-		return ( this.state.hourlyRate * this.state.hoursPerWeek * 4 ) - this.state.costsPerMonth;
+	calcWeeklyRevenue() {
+		return this.state.hourlyRate * this.state.hoursPerWeek;
+	}
+
+	calcWeeklyOperCosts() {
+		return Math.round( this.state.costsPerMonth / Values.weeksPerMonth );
 	}
 
 
 	render() {
-		const monthlyServiceRevenue = this.calcServiceProfit();
+		const weeklyRevenue = this.calcWeeklyRevenue();
+		const costOfGoods = 0;
+		const grossProfit = weeklyRevenue - costOfGoods;
+		const weeklyOperCosts = this.calcWeeklyOperCosts();
+		const netProfit = grossProfit - weeklyOperCosts;
+		const taxes = Math.round(weeklyRevenue * Values.taxRate);
+		const income = netProfit - taxes;
+		const monthlyProfit = Math.round(income * Values.weeksPerMonth);
+		const yearlyProfit = Math.round(monthlyProfit * 12);
 
 		return (
 			<div>
@@ -93,8 +107,18 @@ export default class Service extends React.Component {
 						/>
 				</div>
 				<div className="profitBlock">
-					<span className="profitLine">Potential monthly profit:</span><span className="profitAmount">${monthlyServiceRevenue}</span>
+					<span className="profitLine">Potential monthly profit:</span><span className="profitAmount">${monthlyProfit}</span>
+					<p>That's ${yearlyProfit} per year after taxes.</p>
 				</div>
+				<WeeklyBreakdown
+					weeklyRevenue={weeklyRevenue}
+					costOfGoods={0}
+					grossProfit={grossProfit}
+					weeklyOperCosts={weeklyOperCosts}
+					netProfit={netProfit}
+					taxes={taxes}
+					income={income}
+				/>
 			</div>
 		)
 	}

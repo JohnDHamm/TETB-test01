@@ -39,16 +39,8 @@ export default class Product extends React.Component {
 		return ( this.state.unitCost * this.state.unitsSoldPerWeek );
 	}
 
-	calcGrossProfit() {
-		return ( this.calcWeeklyRevenue() - this.calcCostOfGoods() )
-	}
-
 	calcWeeklyOperCosts() {
 		return Math.round( this.state.otherCosts / Values.weeksPerMonth );
-	}
-
-	calcProductMonthlyProfit() {
-		return (( this.state.unitPrice - this.state.unitCost ) * ( this.state.unitsSoldPerWeek * Values.weeksPerMonth )) - this.state.otherCosts;
 	}
 
 
@@ -58,8 +50,10 @@ export default class Product extends React.Component {
 		const grossProfit = weeklyRevenue - costOfGoods;
 		const weeklyOperCosts = this.calcWeeklyOperCosts();
 		const netProfit = grossProfit - weeklyOperCosts;
-		const taxes = weeklyRevenue * Values.taxRate;
+		const taxes = Math.round(weeklyRevenue * Values.taxRate);
 		const income = netProfit - taxes;
+		const monthlyProfit = Math.round(income * Values.weeksPerMonth);
+		const yearlyProfit = Math.round(monthlyProfit * 12);
 
 		return (
 			<div>
@@ -139,7 +133,8 @@ export default class Product extends React.Component {
 						/>
 				</div>
 				<div className="profitBlock">
-					<span className="profitLine">Potential monthly profit:</span><span className="profitAmount">${Math.round(this.calcProductMonthlyProfit())}</span>
+					<span className="profitLine">Potential monthly profit:</span><span className="profitAmount">${monthlyProfit}</span>
+					<p>That's ${yearlyProfit} per year after taxes.</p>
 				</div>
 				<WeeklyBreakdown
 					weeklyRevenue={weeklyRevenue}
@@ -149,7 +144,7 @@ export default class Product extends React.Component {
 					netProfit={netProfit}
 					taxes={taxes}
 					income={income}
-					/>
+				/>
 			</div>
 		)
 	}
