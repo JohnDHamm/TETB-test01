@@ -2,7 +2,7 @@ import React from 'react';
 import { PieChart, Pie, Cell, Legend } from 'recharts';
 import Values from '../styles/values';
 
-export default class RevenuePieChart extends React.Component {
+export default class ProductPieChart extends React.Component {
 
 
 	render() {
@@ -16,6 +16,9 @@ export default class RevenuePieChart extends React.Component {
 
 		return (
 			<div>
+				<div>
+					<p>Total weekly revenue: ${weeklyRevenue}</p>
+				</div>
 				<PieChart width={350} height={250}>
 					<Pie
 						dataKey="value"
@@ -34,9 +37,6 @@ export default class RevenuePieChart extends React.Component {
 					</Pie>
 					<Legend verticalAlign="bottom" />
 				</PieChart>
-				<div>
-					<p>Total weekly revenue: ${weeklyRevenue}</p>
-				</div>
 			</div>
 
 

@@ -2,8 +2,8 @@ import React from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Values from '../styles/values';
-import WeeklyBreakdown from './weeklyBreakdown';
-
+// import WeeklyBreakdown from './weeklyBreakdown';
+import ServicePieChart from './servicePieChart';
 
 export default class Service extends React.Component {
 		constructor(props) {
@@ -43,6 +43,14 @@ export default class Service extends React.Component {
 		const weeklyOperCosts = this.calcWeeklyOperCosts();
 		const weeklyProfit = grossProfit - weeklyOperCosts;
 		const hourlyPay = (weeklyProfit / this.state.hoursPerWeek).toFixed(2);
+		const serviceChartData = [
+			{ name: 'profit',
+				value: weeklyProfit
+			},
+			{ name: 'costs',
+				value: weeklyOperCosts
+			}
+		]
 
 		return (
 			<div>
@@ -50,7 +58,7 @@ export default class Service extends React.Component {
 					<h3>Service provided</h3>
 				</div>
 				<div className="slider">
-					<p>Hourly rate you will charge: ${this.state.hourlyRate}</p>
+					<p className="sliderLabel">Hourly rate you will charge: ${this.state.hourlyRate}</p>
 					<Slider
 						value={this.state.hourlyRate}
 						defaultValue={this.state.hourlyRate}
@@ -68,7 +76,7 @@ export default class Service extends React.Component {
 						/>
 				</div>
 				<div className="slider">
-					<p>Hours per week: {this.state.hoursPerWeek}</p>
+					<p className="sliderLabel">Hours per week: {this.state.hoursPerWeek}</p>
 					<Slider
 						value={this.state.hoursPerWeek}
 						defaultValue={this.state.hoursPerWeek}
@@ -86,7 +94,7 @@ export default class Service extends React.Component {
 						/>
 				</div>
 				<div className="slider">
-					<p>Other monthly costs: ${this.state.costsPerMonth}</p>
+					<p className="sliderLabel">Monthly costs: ${this.state.costsPerMonth}</p>
 					<Slider
 						value={this.state.costsPerMonth}
 						defaultValue={this.state.costsPerMonth}
@@ -111,14 +119,20 @@ export default class Service extends React.Component {
 						<span className="profitLine">Hourly pay:</span><span className="profitAmount">${hourlyPay}</span>
 					</div>
 				</div>
-				<WeeklyBreakdown
+				<ServicePieChart
+					data={serviceChartData}
 					weeklyRevenue={weeklyRevenue}
-					costOfGoods={0}
-					grossProfit={grossProfit}
-					weeklyOperCosts={weeklyOperCosts}
-					weeklyProfit={weeklyProfit}
 				/>
 			</div>
 		)
 	}
 }
+
+				// <WeeklyBreakdown
+				// 	weeklyRevenue={weeklyRevenue}
+				// 	costOfGoods={0}
+				// 	grossProfit={grossProfit}
+				// 	weeklyOperCosts={weeklyOperCosts}
+				// 	weeklyProfit={weeklyProfit}
+				// />
+

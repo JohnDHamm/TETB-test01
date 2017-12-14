@@ -1,5 +1,5 @@
 import React from 'react';
-import Values from '../styles/values';
+// import Values from '../styles/values';
 
 export default class WeeklyBreakdown extends React.Component {
 

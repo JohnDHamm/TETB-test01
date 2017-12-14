@@ -2,8 +2,8 @@ import React from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Values from '../styles/values';
-import WeeklyBreakdown from './weeklyBreakdown';
-import RevenuePieChart from './revenuePieChart';
+// import WeeklyBreakdown from './weeklyBreakdown';
+import ProductPieChart from './productPieChart';
 
 export default class Product extends React.Component {
 	constructor(props) {
@@ -65,10 +65,10 @@ export default class Product extends React.Component {
 			{ name: 'profit',
 				value: weeklyProfit
 			},
-			{ name: 'operations costs',
+			{ name: 'other costs',
 				value: weeklyOperCosts
 			},
-			{ name: 'cost of goods',
+			{ name: 'cost of materials',
 				value: costOfGoods
 			}
 		]
@@ -79,7 +79,7 @@ export default class Product extends React.Component {
 					<h3>Product for sale</h3>
 				</div>
 				<div className="slider">
-					<p>Item sale price: ${this.state.unitPrice}</p>
+					<p className="sliderLabel">Item sale price: ${this.state.unitPrice}</p>
 					<Slider
 						value={this.state.unitPrice}
 						defaultValue={this.state.unitPrice}
@@ -98,7 +98,7 @@ export default class Product extends React.Component {
 
 				</div>
 				<div className="slider">
-					<p>Number of items sold each week: {this.state.unitsSoldPerWeek}</p>
+					<p className="sliderLabel">Number of items sold each week: {this.state.unitsSoldPerWeek}</p>
 					<Slider
 						value={this.state.unitsSoldPerWeek}
 						defaultValue={this.state.unitsSoldPerWeek}
@@ -116,7 +116,7 @@ export default class Product extends React.Component {
 						/>
 				</div>
 				<div className="slider">
-					<p>Cost to make one item: ${this.state.unitCost}</p>
+					<p className="sliderLabel">Cost to make one item: ${this.state.unitCost}</p>
 					<Slider
 						value={this.state.unitCost}
 						defaultValue={this.state.unitCost}
@@ -134,13 +134,13 @@ export default class Product extends React.Component {
 						/>
 				</div>
 				<div className="slider">
-					<p>Hours to make one item: {this.state.hoursPerUnit}</p>
+					<p className="sliderLabel">Hours to make one item: {this.state.hoursPerUnit}</p>
 					<Slider
 						value={this.state.hoursPerUnit}
 						defaultValue={this.state.hoursPerUnit}
-						min={1}
-						max={10}
-						step={1}
+						min={0}
+						max={8}
+						step={0.25}
 						onChange={this.handleHoursPerUnitSlider.bind(this)}
 						trackStyle={{ backgroundColor: Values.costs}}
 						handleStyle={{
@@ -152,7 +152,7 @@ export default class Product extends React.Component {
 						/>
 				</div>
 				<div className="slider">
-					<p>Other monthly costs: ${this.state.otherCosts}</p>
+					<p className="sliderLabel">Other monthly costs: ${this.state.otherCosts}</p>
 					<Slider
 						value={this.state.otherCosts}
 						defaultValue={this.state.otherCosts}
@@ -177,7 +177,7 @@ export default class Product extends React.Component {
 						<span className="profitLine">Hourly pay:</span><span className="profitAmount">${hourlyRate}</span>
 					</div>
 				</div>
-				<RevenuePieChart
+				<ProductPieChart
 					data={productChartData}
 					weeklyRevenue={weeklyRevenue}
 				/>
