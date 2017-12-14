@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './containers/home';
-import Planner from './containers/planner';
-import GoalTracker from './containers/goalTracker';
+import Routing from './containers/routing';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 
 class App extends Component {
   render() {
     return (
-			<BrowserRouter>
-				<div>
-					<Switch>
-						<Route path="/planner" component={Planner} />
-						<Route path="/goalTracker" component={GoalTracker} />
-						<Route path="/" component={Home} />
-					</Switch>
-				</div>
-			</BrowserRouter>
+			<MuiThemeProvider>
+				<Routing />
+			</MuiThemeProvider>
     );
   }
 }
