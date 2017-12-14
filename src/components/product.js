@@ -79,7 +79,7 @@ export default class Product extends React.Component {
 					<h3>Product for sale</h3>
 				</div>
 				<div className="slider">
-					<p>Unit sell price: ${this.state.unitPrice}</p>
+					<p>Item sale price: ${this.state.unitPrice}</p>
 					<Slider
 						value={this.state.unitPrice}
 						defaultValue={this.state.unitPrice}
@@ -98,7 +98,7 @@ export default class Product extends React.Component {
 
 				</div>
 				<div className="slider">
-					<p>Units sold per week: {this.state.unitsSoldPerWeek}</p>
+					<p>Number of items sold each week: {this.state.unitsSoldPerWeek}</p>
 					<Slider
 						value={this.state.unitsSoldPerWeek}
 						defaultValue={this.state.unitsSoldPerWeek}
@@ -116,7 +116,7 @@ export default class Product extends React.Component {
 						/>
 				</div>
 				<div className="slider">
-					<p>Unit cost: ${this.state.unitCost}</p>
+					<p>Cost to make one item: ${this.state.unitCost}</p>
 					<Slider
 						value={this.state.unitCost}
 						defaultValue={this.state.unitCost}
@@ -134,7 +134,7 @@ export default class Product extends React.Component {
 						/>
 				</div>
 				<div className="slider">
-					<p>Hours to make one unit: {this.state.hoursPerUnit}</p>
+					<p>Hours to make one item: {this.state.hoursPerUnit}</p>
 					<Slider
 						value={this.state.hoursPerUnit}
 						defaultValue={this.state.hoursPerUnit}

@@ -41,19 +41,16 @@ export default class Service extends React.Component {
 		const costOfGoods = 0;
 		const grossProfit = weeklyRevenue - costOfGoods;
 		const weeklyOperCosts = this.calcWeeklyOperCosts();
-		const netProfit = grossProfit - weeklyOperCosts;
-		const taxes = Math.round(weeklyRevenue * Values.taxRate);
-		const income = netProfit - taxes;
-		const monthlyProfit = Math.round(income * Values.weeksPerMonth);
-		const yearlyProfit = Math.round(monthlyProfit * 12);
+		const weeklyProfit = grossProfit - weeklyOperCosts;
+		const hourlyPay = (weeklyProfit / this.state.hoursPerWeek).toFixed(2);
 
 		return (
 			<div>
 				<div className="sectionTitle">
-					<h3>Service to render</h3>
+					<h3>Service provided</h3>
 				</div>
 				<div className="slider">
-					<p>Hourly rate charged: ${this.state.hourlyRate}</p>
+					<p>Hourly rate you will charge: ${this.state.hourlyRate}</p>
 					<Slider
 						value={this.state.hourlyRate}
 						defaultValue={this.state.hourlyRate}
@@ -71,7 +68,7 @@ export default class Service extends React.Component {
 						/>
 				</div>
 				<div className="slider">
-					<p>Billable hours per week: {this.state.hoursPerWeek}</p>
+					<p>Hours per week: {this.state.hoursPerWeek}</p>
 					<Slider
 						value={this.state.hoursPerWeek}
 						defaultValue={this.state.hoursPerWeek}
@@ -89,7 +86,7 @@ export default class Service extends React.Component {
 						/>
 				</div>
 				<div className="slider">
-					<p>Monthly costs: ${this.state.costsPerMonth}</p>
+					<p>Other monthly costs: ${this.state.costsPerMonth}</p>
 					<Slider
 						value={this.state.costsPerMonth}
 						defaultValue={this.state.costsPerMonth}
@@ -107,17 +104,19 @@ export default class Service extends React.Component {
 						/>
 				</div>
 				<div className="profitBlock">
-					<span className="profitLine">Potential monthly profit:</span><span className="profitAmount">${monthlyProfit}</span>
-					<p>That's ${yearlyProfit} per year after taxes.</p>
+					<div>
+						<span className="profitLine">Weekly profit:</span><span className="profitAmount">${weeklyProfit}</span>
+					</div>
+					<div>
+						<span className="profitLine">Hourly pay:</span><span className="profitAmount">${hourlyPay}</span>
+					</div>
 				</div>
 				<WeeklyBreakdown
 					weeklyRevenue={weeklyRevenue}
 					costOfGoods={0}
 					grossProfit={grossProfit}
 					weeklyOperCosts={weeklyOperCosts}
-					netProfit={netProfit}
-					taxes={taxes}
-					income={income}
+					weeklyProfit={weeklyProfit}
 				/>
 			</div>
 		)
