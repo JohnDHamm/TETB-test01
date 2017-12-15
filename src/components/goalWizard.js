@@ -14,8 +14,8 @@ export default class GoalWizard extends React.Component {
 		this.state = {
 			category: 1,
 			goalName: 'iPhone X',
-			goalAmount: 999,
-			startFunds: 50,
+			goalAmount: 1000,
+			startFunds: 100,
 			targetDate: null,
 			currentDate: new Date(),
 			showProgress: false,
@@ -56,7 +56,6 @@ export default class GoalWizard extends React.Component {
 		this.setState({ daysToGoal: daysToGoal });
 		const weeksToGoal = Math.round( daysToGoal / 7 );
 		this.setState({ weeksToGoal })
-		console.log("time to reach goal:", daysToGoal, "days / ", weeksToGoal, " weeks");
 	}
 
 	render() {

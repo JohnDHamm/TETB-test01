@@ -5,15 +5,15 @@ export default class Home extends React.Component {
 
 	render() {
 		return(
-			<div>
-				<div>Home</div>
-				<div>
+			<div className="container">
+				<div className="pageTitle">Teen Entreprenuer Toolbox</div>
+				<div className="homeButton">
 					<RaisedButton
 						label="Profit Planning"
 						href="/planner"
 					/>
 				</div>
-				<div>
+				<div className="homeButton">
 					<RaisedButton
 						label="Goal Tracker"
 						href="/goalTracker"

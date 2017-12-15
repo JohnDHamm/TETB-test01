@@ -7,6 +7,10 @@
 	text-align: center;
 }
 
+.homeButton {
+	margin: 20px auto;
+}
+
 .sectionTitle {
 	color: #2a6ece;
 	border-bottom: 1px solid #2a6ece;
