@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import Planner from './containers/planner';
+import Routing from './containers/routing';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+
 
 class App extends Component {
   render() {
     return (
-      <Planner />
+			<MuiThemeProvider>
+				<Routing />
+			</MuiThemeProvider>
     );
   }
 }

@@ -4,6 +4,8 @@ import '../styles/planner.css';
 import Product from '../components/product';
 import Service from '../components/service';
 
+import RaisedButton from 'material-ui/RaisedButton';
+
 export default class Planner extends React.Component {
 	constructor(props){
 		super(props);
@@ -28,12 +30,20 @@ export default class Planner extends React.Component {
 				</div>
 				{this.state.toggle === 'none' &&
 					<div>
-						<button
-							onClick={this.selectProduct.bind(this)}
-						>PRODUCT</button>
-						<button
-							onClick={this.selectService.bind(this)}
-						>SERVICE</button>
+						<div className="homeButton">
+							<RaisedButton
+								label="I have a product to sell"
+								fullWidth={true}
+								onClick={this.selectProduct.bind(this)}
+								/>
+						</div>
+						<div className="homeButton">
+							<RaisedButton
+								label="I have a service to provide"
+								fullWidth={true}
+								onClick={this.selectService.bind(this)}
+								/>
+						</div>
 					</div>
 				}
 

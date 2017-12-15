@@ -1,0 +1,24 @@
+.chartGoalText {
+	margin: 0;
+	font-size: 15px;
+}
+
+.chartCurrencyTextLabel {
+	margin: 0;
+	font-size: 30px;
+
+}
+
+.noMargin {
+	margin: 0;
+}
+
+.dateLabel {
+	margin: 0;
+	font-size: 20px;
+	font-style: italic;
+}
+
+.weeklyPace {
+	margin: 10px auto;
+}
