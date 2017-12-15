@@ -13,9 +13,9 @@ export default class GoalWizard extends React.Component {
 		super(props);
 		this.state = {
 			category: 1,
-			goalName: 'iPhone X',
-			goalAmount: 1000,
-			startFunds: 100,
+			goalName: '',
+			goalAmount: '',
+			startFunds: '',
 			targetDate: null,
 			currentDate: new Date(),
 			showProgress: false,
