@@ -63,7 +63,9 @@ export default class GoalWizard extends React.Component {
 			<div>
 			{!this.state.showProgress &&
 				<div>
-					<div>Let's set your goal:</div>
+					<div>
+						<p style={{ fontStyle: 'italic', textAlign: 'center' }}>Let's set your goal:</p>
+					</div>
 					<div>
 						<p>Select a category:</p>
 						<DropDownMenu value={this.state.category} onChange={this.handleCategorySelect.bind(this)}>

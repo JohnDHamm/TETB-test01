@@ -6,16 +6,20 @@ export default class Home extends React.Component {
 	render() {
 		return(
 			<div className="container">
-				<div className="pageTitle">Teen Entreprenuer Toolbox</div>
+				<div className="pageTitle">
+					<h1>Teen Entreprenuer Toolbox</h1>
+				</div>
 				<div className="homeButton">
 					<RaisedButton
-						label="Profit Planning"
+						label="See if your idea can make a profit"
+						fullWidth={true}
 						href="/planner"
 					/>
 				</div>
 				<div className="homeButton">
 					<RaisedButton
-						label="Goal Tracker"
+						label="Set a goal and track your progress"
+						fullWidth={true}
 						href="/goalTracker"
 					/>
 				</div>

@@ -33,12 +33,14 @@ export default class Planner extends React.Component {
 						<div className="homeButton">
 							<RaisedButton
 								label="I have a product to sell"
+								fullWidth={true}
 								onClick={this.selectProduct.bind(this)}
 								/>
 						</div>
 						<div className="homeButton">
 							<RaisedButton
 								label="I have a service to provide"
+								fullWidth={true}
 								onClick={this.selectService.bind(this)}
 								/>
 						</div>

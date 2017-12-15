@@ -14,24 +14,18 @@ export default class GoalTrackChart extends React.Component {
 		const { goalName, goalAmount, currentFunds, targetDate, weeksToGoal } = this.props;
 		const goalDate = this.convertDate(targetDate);
 		const currentDate = this.convertDate(new Date());
-		// console.log("goalDate", goalDate);
-		// console.log("currentDate", currentDate);
 		const weeklyPace = Math.round(( goalAmount - currentFunds ) / weeksToGoal);
 
-		const chartData = [
-					{name: 'Funds', needed: goalAmount - currentFunds, balance: currentFunds}
-		];
 		const chartHeight = 500,
 					chartWidth = 100,
 					labelWidth = 300,
 					topHeight = chartHeight * ( ( goalAmount - currentFunds ) / goalAmount ),
 					btmHeight = chartHeight * ( currentFunds / goalAmount )
 
-
 		const styles = {
 			chartContainer: {
 				position: 'relative',
-				marginTop: 50
+				margin: '50px auto'
 			},
 			neededFundsLabel: {
 				height: topHeight,
@@ -74,6 +68,13 @@ export default class GoalTrackChart extends React.Component {
 				borderBottomColor: '#CCC',
 				borderBottomWidth: 1
 			},
+			goalDateLabel: {
+				position: 'absolute',
+				top: -20,
+				height: 20,
+				width: '100%',
+				textAlign: 'right'
+			},
 			currentLabel: {
 				position: 'absolute',
 				bottom: 0,
@@ -82,19 +83,32 @@ export default class GoalTrackChart extends React.Component {
 				borderTopStyle: 'dotted',
 				borderTopColor: Values.revenue,
 				borderTopWidth: 1
+			},
+			currentDateLabel: {
+				position: 'absolute',
+				bottom: btmHeight - 20,
+				height: 20,
+				width: '100%',
+				textAlign: 'right'
+			},
+			goalTitle: {
+				textAlign: 'center',
+				fontSize: 20,
+				fontStyle: 'italic'
 			}
-
 		}
 
 		return (
 			<div>
-				<div>Goal for {goalName}</div>
-
+				<div style={styles.goalTitle}>Goal for {goalName}</div>
 
 				<div style={styles.chartContainer}>
 
 					<div id="goalLabel" style={styles.goalLabel}>
 						<span className="noMargin">goal amount </span><span className="chartCurrencyTextLabel">${goalAmount}</span>
+					</div>
+					<div id="goalDate" style={styles.goalDateLabel}>
+						<p className="dateLabel">{goalDate}</p>
 					</div>
 
 					<div style={{ height: topHeight }}>
@@ -113,11 +127,14 @@ export default class GoalTrackChart extends React.Component {
 					<div id="currentLabel" style={styles.currentLabel}>
 						<span className="noMargin">current balance </span><span className="chartCurrencyTextLabel">${currentFunds}</span>
 					</div>
+					<div id="currentDate" style={styles.currentDateLabel}>
+						<p className="dateLabel">{currentDate}</p>
+					</div>
 
 				</div>
 
-				<div>
-					<p>Weekly goal: ${weeklyPace}</p>
+				<div className="weeklyPace">
+					<p style={{ textAlign: 'center', fontSize: 25 }}>Weekly goal: ${weeklyPace}</p>
 				</div>
 			</div>
 

@@ -9,7 +9,9 @@ export default class GoalTracker extends React.Component {
 
 		return(
 			<div className="container">
-				<div>Goal Tracker</div>
+				<div className="pageTitle">
+					<h2>Goal Tracker</h2>
+				</div>
 				<GoalWizard />
 			</div>
 
