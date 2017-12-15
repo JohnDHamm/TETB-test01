@@ -13,12 +13,32 @@ export default class ProductPieChart extends React.Component {
 		// 	return ()
 		// }
 
+		const styles = {
+			chartContainer: {
+				position: 'relative'
+			},
+			revenueBlock: {
+				position: 'absolute',
+				height: 50,
+				width: 90,
+				top: 80,
+				left: 105,
+			},
+			revAmt: {
+				textAlign: 'center',
+				fontSize: 25,
+				margin: 0,
+			},
+			revLabel: {
+				textAlign: 'center',
+				margin: 0,
+				fontSize: 12
+			}
+		}
+
 
 		return (
-			<div>
-				<div>
-					<p>Total weekly revenue: ${weeklyRevenue}</p>
-				</div>
+			<div style={styles.chartContainer}>
 				<PieChart width={350} height={250}>
 					<Pie
 						dataKey="value"
@@ -37,6 +57,10 @@ export default class ProductPieChart extends React.Component {
 					</Pie>
 					<Legend verticalAlign="bottom" />
 				</PieChart>
+				<div style={styles.revenueBlock}>
+					<p style={styles.revAmt}>${weeklyRevenue}</p>
+					<p style={styles.revLabel}>weekly revenue</p>
+				</div>
 			</div>
 
 
@@ -44,3 +68,5 @@ export default class ProductPieChart extends React.Component {
 		)
 	}
 }
+
+
