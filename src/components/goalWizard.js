@@ -122,7 +122,6 @@ export default class GoalWizard extends React.Component {
 						goalAmount={this.state.goalAmount}
 						currentFunds={this.state.startFunds}
 						targetDate={this.state.targetDate}
-						daysToGoal={this.state.daysToGoal}
 						weeksToGoal={this.state.weeksToGoal}
 					/>
 				</div>
