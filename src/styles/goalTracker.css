@@ -1,12 +1,6 @@
-.chartGoalText {
-	margin: 0;
-	font-size: 15px;
-}
-
 .chartCurrencyTextLabel {
 	margin: 0;
 	font-size: 30px;
-
 }
 
 .noMargin {
@@ -20,5 +14,5 @@
 }
 
 .weeklyPace {
-	margin: 10px auto;
+	margin: 50px auto 0 auto;
 }
