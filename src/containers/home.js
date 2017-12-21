@@ -7,7 +7,7 @@ export default class Home extends React.Component {
 		return(
 			<div className="container">
 				<div className="pageTitle">
-					<h1>Teen Entreprenuer Toolbox</h1>
+					<h1>Teen Entrepreneur Toolbox</h1>
 				</div>
 				<div className="homeButton">
 					<RaisedButton
